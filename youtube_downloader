@@ -1,0 +1,15 @@
+# youtube_downloader.py
+
+from pytube import YouTube
+
+def download_video(url, resolution="720p"):
+    yt = YouTube(url)
+    stream = yt.streams.filter(res=resolution, file_extension="mp4").first()
+    if stream:
+        stream.download(output_path="downloads/")
+        print(f"Downloaded: {yt.title}")
+    else:
+        print("Resolution not available.")
+
+# Sample usage
+download_video("https://www.youtube.com/watch?v=EXAMPLE")
